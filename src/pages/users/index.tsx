@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import cx from 'classnames';
+import dayjs from 'dayjs';
 
 import type { FC } from 'react';
 
@@ -121,7 +122,9 @@ export const UsersPage: FC = () => {
             <p className={TEXT_BODY_CLASS}>{user.name.first} {user.name.last}</p>
             <p className={TEXT_BODY_CLASS}>{user.email}</p>
             <p className={TEXT_BODY_CLASS}>{user.gender}</p>
-            <p className={TEXT_BODY_CLASS}>{user.registered.date}</p>
+            <p className={TEXT_BODY_CLASS}>
+              {dayjs(user.registered.date).format('DD-MM-YYYY HH:MM')}
+            </p>
           </div>
         ))}
         {hasNextPage && (!isFetching || !isFetchingNextPage) && keyword.length < 1 && (
