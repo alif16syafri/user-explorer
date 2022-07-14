@@ -1,0 +1,9 @@
+.row {
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  grid-auto-flow: column;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
