@@ -56,10 +56,11 @@ export const UsersPage: FC = () => {
         <select
           className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 h-12 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           value={gender}
+          data-testid="filter-select"
           onChange={(e) => setGender(e.target.value as GenderFilter)}
         >
           {Object.values(GenderFilter).map((item) => (
-            <option value={item}>{item.toUpperCase()}</option>
+            <option key={item} value={item}>{item.toUpperCase()}</option>
           ))}
         </select>
         <Chevron className="absolute" />
@@ -82,7 +83,7 @@ export const UsersPage: FC = () => {
         const isSorted = sortedColumn.column === col;
 
         return (
-          <div onClick={() => handleSort(col)} className="relative cursor-pointer">
+          <div className="relative cursor-pointer" key={col} onClick={() => handleSort(col)}>
             <p className="font-semibold capitalize">
               {col}
             </p>
@@ -115,7 +116,7 @@ export const UsersPage: FC = () => {
     return (
       <div>
         {users.map((user) => (
-          <div className={cx(styles.row, ROW_CLASS)}>
+          <div className={cx(styles.row, ROW_CLASS)} key={user.email}>
             <p className={TEXT_BODY_CLASS}>{user.login.username}</p>
             <p className={TEXT_BODY_CLASS}>{user.name.first} {user.name.last}</p>
             <p className={TEXT_BODY_CLASS}>{user.email}</p>
@@ -124,7 +125,7 @@ export const UsersPage: FC = () => {
           </div>
         ))}
         {hasNextPage && (!isFetching || !isFetchingNextPage) && keyword.length < 1 && (
-          <div ref={loadMoreMarker} style={{ height: 10, width: '100%' }} />
+          <div data-testid="load-more-marker" ref={loadMoreMarker} style={{ height: 10, width: '100%' }} />
         )}
         {isFetchingNextPage && (
           <div className="flex items-center justify-center mt-5">

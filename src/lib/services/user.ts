@@ -7,6 +7,8 @@ type UserResponse = {
   results: User[];
 }
 
+const BASE_URL = 'https://randomuser.me/api';
+
 type FetchUsersParams = {
   page: number;
   limit: number
@@ -21,7 +23,7 @@ export const fetchUsers = async ({
   keyword,
   sort,
 }: FetchUsersParams): Promise<UserResponse> => {
-  const { data } = await axios.get('https://randomuser.me/api', {
+  const { data } = await axios.get(BASE_URL, {
     params: {
       results: limit,
       page,
